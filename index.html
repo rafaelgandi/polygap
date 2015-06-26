@@ -22,6 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="#303F9F">
  <link rel="import" href="components/elements.html">
+ <script>!window.PhoneGap && document.write("<script src='phonegap.js'>\x3C/script>");</script>
  <style shim-shadowdom>
   
     body {
@@ -94,10 +95,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	
 	
 		<paper-shadow class="card" z="1">
-			<p class="paper-font-body2">This is another card.</p>
+			<p id="paper-font-body2">This is another card.</p>
 		</paper-shadow>
 	</div>
-	
+	<script>
+	document.addEventListener('deviceready', function () {
+		if (window.StatusBar) {
+			document.getElementById('paper-font-body2').innerHTML = 'window.StatusBar alive!';
+			StatusBar.backgroundColorByHexString("#333");
+		}
+		if (cordova.platformId == 'android') {
+			StatusBar.backgroundColorByHexString("#333");
+		}
+		
+	}, true);
+	</script>
 </body>
 
 </html>
